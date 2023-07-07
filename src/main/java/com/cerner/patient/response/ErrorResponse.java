@@ -2,57 +2,18 @@ package com.cerner.patient.response;
 
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ErrorResponse {
 
 	private int statusCode;
 	private Date timestamp;
 	private String message;
 	private String description;
-	
-	public ErrorResponse(int statusCode, Date timestamp, String message, String description) {
-		super();
-		this.statusCode = statusCode;
-		this.timestamp = timestamp;
-		this.message = message;
-		this.description = description;
-	}
-
-	public ErrorResponse() {
-		super();
-	}
-
-	public int getStatusCode() {
-		return statusCode;
-	}
-
-	public void setStatusCode(int statusCode) {
-		this.statusCode = statusCode;
-	}
-
-	public Date getTimestamp() {
-		return timestamp;
-	}
-
-	public void setTimestamp(Date timestamp) {
-		this.timestamp = timestamp;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
-	
 	
 }

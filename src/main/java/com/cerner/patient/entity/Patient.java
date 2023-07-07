@@ -6,20 +6,29 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="patient")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Patient extends AbstractEntity {
 	
 	@Id
 	@Column(name = "key", nullable = false)
 	@SequenceGenerator(name = "patient_seq", sequenceName = "patient_seq", initialValue = 1, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "patient_seq")
 	private Long key;
 	@Column(name = "first_name")
 	private String firstName;
@@ -32,48 +41,4 @@ public class Patient extends AbstractEntity {
 	private Character gender;
 	@Column(name = "mobile_number")
 	private String mobileNumber;
-	public Long getKey() {
-		return key;
-	}
-	public void setKey(Long key) {
-		this.key = key;
-	}
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public Address getAddress() {
-		return address;
-	}
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-	public Date getDob() {
-		return dob;
-	}
-	public void setDob(Date dob) {
-		this.dob = dob;
-	}
-	public Character getGender() {
-		return gender;
-	}
-	public void setGender(Character gender) {
-		this.gender = gender;
-	}
-	public String getMobileNumber() {
-		return mobileNumber;
-	}
-	public void setMobileNumber(String mobileNumber) {
-		this.mobileNumber = mobileNumber;
-	}
-	
-	
 }

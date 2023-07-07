@@ -1,5 +1,6 @@
 package com.cerner.patient.exception;
 
+import java.util.Collections;
 import java.util.Date;
 
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
 import com.cerner.patient.response.ErrorResponse;
+import com.cerner.patient.response.GenericApiResponse;
 
 @RestControllerAdvice
 public class CustomExceptionHandler {
@@ -24,5 +26,13 @@ public class CustomExceptionHandler {
 	    
 	    return message;
 	  }
+	
+	@ExceptionHandler(PatientBusinessException.class)
+    public GenericApiResponse<?> handleServiceException(PatientBusinessException exception) {
+		GenericApiResponse<?> serviceResponse = new GenericApiResponse<>();
+        serviceResponse.setStatus("FAILED");
+        serviceResponse.setError(Collections.singletonList(new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(),new Date(),exception.getMessage(), exception.getMessage())));
+        return serviceResponse;
+    }
 
 }
