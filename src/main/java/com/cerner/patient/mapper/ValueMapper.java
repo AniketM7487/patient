@@ -1,5 +1,7 @@
 package com.cerner.patient.mapper;
 
+import java.time.LocalDate;
+
 import com.cerner.patient.dto.AddressDTO;
 import com.cerner.patient.dto.PatientRequestDTO;
 import com.cerner.patient.dto.PatientResponseDTO;
@@ -29,7 +31,7 @@ public class ValueMapper {
 		address.setState(patientRequestDTO.getAddress().getState());
 		address.setPinCode(patientRequestDTO.getAddress().getPinCode());
 		patient.setAddress(address);
-		patient.setDob(patientRequestDTO.getDob());
+		patient.setDob(LocalDate.parse(patientRequestDTO.getDob()));
 		patient.setGender(patientRequestDTO.getGender());
 		patient.setMobileNumber(patientRequestDTO.getMobileNumber());
 		return patient;
@@ -46,7 +48,7 @@ public class ValueMapper {
 		address.setState(patientResults.getAddress().getState());
 		address.setPinCode(patientResults.getAddress().getPinCode());
 		patient.setAddress(address);
-		patient.setDob(patientResults.getDob());
+		patient.setDob(patientResults.getDob().toString());
 		patient.setGender(patientResults.getGender());
 		patient.setMobileNumber(patientResults.getMobileNumber());
 		return patient;
@@ -61,7 +63,7 @@ public class ValueMapper {
 		address.setState(patientRequestDTO.getAddress().getState());
 		address.setPinCode(patientRequestDTO.getAddress().getPinCode());
 		patient.setAddress(address);
-		patient.setDob(patientRequestDTO.getDob());
+		patient.setDob(LocalDate.parse(patientRequestDTO.getDob()));
 		patient.setGender(patientRequestDTO.getGender());
 		patient.setMobileNumber(patientRequestDTO.getMobileNumber());
 		return patient;

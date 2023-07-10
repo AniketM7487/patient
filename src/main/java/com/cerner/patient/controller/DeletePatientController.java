@@ -26,12 +26,7 @@ public class DeletePatientController {
 	@DeleteMapping("/{patientId}")
 	public ResponseEntity<GenericApiResponse> deletePatient(@PathVariable Long patientId) {
 		log.info("PatientController::deletePatient by id  {}", patientId);
-		patientService.deletePatient(patientId);
-		GenericApiResponse<PatientResponseDTO> responseDTO = GenericApiResponse
-                .<PatientResponseDTO>builder()
-                .status("SUCCESS")
-                .data(null)
-                .build();
+		GenericApiResponse<PatientResponseDTO> responseDTO=patientService.deletePatient(patientId);
 
         log.info("PatientController::deletePatient response {}", ValueMapper.jsonAsString(responseDTO));
 

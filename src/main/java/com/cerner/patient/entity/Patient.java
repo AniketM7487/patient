@@ -1,5 +1,6 @@
 package com.cerner.patient.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -37,8 +38,8 @@ public class Patient extends AbstractEntity {
 	@OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
 	@JoinColumn(name = "addressid", referencedColumnName = "key")
 	private Address address;
-	private Date dob;
-	private Character gender;
+	private LocalDate dob;
+	private String gender;
 	@Column(name = "mobile_number")
 	private String mobileNumber;
 }

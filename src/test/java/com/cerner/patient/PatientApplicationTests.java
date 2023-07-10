@@ -10,4 +10,9 @@ class PatientApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	public void main() {
+		PatientApplication.main(new String[] {});
+	}
+
 }

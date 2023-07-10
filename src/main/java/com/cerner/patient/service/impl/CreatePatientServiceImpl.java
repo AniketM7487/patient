@@ -7,8 +7,11 @@ import com.cerner.patient.dto.PatientRequestDTO;
 import com.cerner.patient.dto.PatientResponseDTO;
 import com.cerner.patient.entity.Patient;
 import com.cerner.patient.exception.PatientBusinessException;
+import com.cerner.patient.exception.PatientExistException;
+import com.cerner.patient.mapper.CommonService;
 import com.cerner.patient.mapper.ValueMapper;
 import com.cerner.patient.repository.PatientRepository;
+import com.cerner.patient.response.GenericApiResponse;
 import com.cerner.patient.service.CreatePatientService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -20,16 +23,25 @@ public class CreatePatientServiceImpl implements CreatePatientService{
 	@Autowired
 	private PatientRepository patientRepository;
 
+	@Autowired
+	private CommonService commonService;
 	
-	public PatientResponseDTO addPatient(PatientRequestDTO patientRequestDTO) {
-		PatientResponseDTO patientResponseDTO;
+	public GenericApiResponse<PatientResponseDTO> addPatient(PatientRequestDTO patientRequestDTO) {
+		GenericApiResponse<PatientResponseDTO> patientResponse;
+		PatientResponseDTO patientResponseDTO=null;
 		try {
+			
             log.info("PatientService:addPatient execution started.");
-            Patient patient = ValueMapper.convertToEntity(patientRequestDTO);
-            log.debug("PatientService:addPatient request parameters {}", ValueMapper.jsonAsString(patientRequestDTO));
-
-            Patient patientResults = patientRepository.save(patient);
-            patientResponseDTO = ValueMapper.convertToDTO(patientResults);
+            if(commonService.isDuplicate(patientRequestDTO)) {
+            	throw new PatientExistException("Exception occurred while add a new Patient. Patient already exits.");
+            }else {
+	            Patient patient = ValueMapper.convertToEntity(patientRequestDTO);
+	            log.debug("PatientService:addPatient request parameters {}", ValueMapper.jsonAsString(patientRequestDTO));
+	
+	            Patient patientResults = patientRepository.save(patient);
+	            patientResponseDTO = ValueMapper.convertToDTO(patientResults);
+            }
+            patientResponse = CommonService.buildResponse(patientResponseDTO);
             log.debug("PatientService:addPatient received response from Database {}", ValueMapper.jsonAsString(patientRequestDTO));
 
         } catch (Exception ex) {
@@ -37,6 +49,6 @@ public class CreatePatientServiceImpl implements CreatePatientService{
             throw new PatientBusinessException("Exception occurred while add a new Patient");
         }
         log.info("PatientService:addPatient execution ended.");
-        return patientResponseDTO;
+        return patientResponse;
 	}
 }

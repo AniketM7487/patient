@@ -1,5 +1,7 @@
 package com.cerner.patient.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,18 +28,13 @@ public class UpdatePatientController {
 	private UpdatePatientService patientService;
 	
 	@PutMapping("/{patientId}")
-	public ResponseEntity<GenericApiResponse> updatePatient(@PathVariable Long patientId,@RequestBody PatientRequestDTO patientRequestDTO) {
+	public ResponseEntity<GenericApiResponse> updatePatient(@PathVariable Long patientId,@Valid @RequestBody PatientRequestDTO patientRequestDTO) {
 		log.info("PatientController::updatePatient by id  {}", patientId);
-		PatientResponseDTO patientResponseDTO = patientService.updatePatient(patientId,patientRequestDTO);
-		GenericApiResponse<PatientResponseDTO> responseDTO = GenericApiResponse
-                .<PatientResponseDTO>builder()
-                .status("SUCCESS")
-                .data(patientResponseDTO)
-                .build();
+		GenericApiResponse<PatientResponseDTO> patientResponseDTO = patientService.updatePatient(patientId,patientRequestDTO);
 
-        log.info("PatientController::updatePatient response {}", ValueMapper.jsonAsString(responseDTO));
+        log.info("PatientController::updatePatient response {}", ValueMapper.jsonAsString(patientResponseDTO));
 
-        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+        return new ResponseEntity<>(patientResponseDTO, HttpStatus.OK);
 	}
 	
 }

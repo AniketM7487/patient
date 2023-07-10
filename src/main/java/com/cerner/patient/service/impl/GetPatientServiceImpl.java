@@ -12,6 +12,7 @@ import com.cerner.patient.dto.PatientResponseDTO;
 import com.cerner.patient.entity.Patient;
 import com.cerner.patient.exception.PatientBusinessException;
 import com.cerner.patient.exception.PatientNotFoundException;
+import com.cerner.patient.mapper.CommonService;
 import com.cerner.patient.mapper.ValueMapper;
 import com.cerner.patient.repository.PatientRepository;
 import com.cerner.patient.response.GenericApiResponse;
@@ -26,9 +27,9 @@ public class GetPatientServiceImpl implements GetPatientService {
 	@Autowired
 	private PatientRepository patientRepository;
 
-	public List<PatientResponseDTO> getPatients() {
+	public GenericApiResponse<List<PatientResponseDTO>> getPatients() {
 		List<PatientResponseDTO> patientResponseDTOS = null;
-
+		GenericApiResponse<List<PatientResponseDTO>> patientResponse=null;
         try {
             log.info("PatientService:getPatients execution started.");
 
@@ -41,8 +42,8 @@ public class GetPatientServiceImpl implements GetPatientService {
             } else {
             	patientResponseDTOS = Collections.emptyList();
             }
-
-            log.debug("PatientService:getPatients retrieving patients from database  {}", ValueMapper.jsonAsString(patientResponseDTOS));
+            patientResponse=CommonService.buildResponseForList(patientResponseDTOS);
+            log.debug("PatientService:getPatients retrieving patients from database  {}", ValueMapper.jsonAsString(patientResponse));
 
         } catch (Exception ex) {
             log.error("Exception occurred while retrieving patients from database , Exception message {}", ex.getMessage());
@@ -50,21 +51,21 @@ public class GetPatientServiceImpl implements GetPatientService {
         }
 
         log.info("PatientService:getPatients execution ended.");
-        return patientResponseDTOS;
+        return patientResponse;
 		
 	}
 	
-	public PatientResponseDTO getPatientById(Long patientId) {
-		PatientResponseDTO patientResponseDTO = null;
+	public GenericApiResponse<PatientResponseDTO> getPatientById(Long patientId) {
+		GenericApiResponse<PatientResponseDTO> patientResponse= null;
 
         try {
             log.info("PatientService:getPatientById execution started.");
 
             Patient patient = patientRepository.findById(patientId)
             		.orElseThrow(() -> new PatientNotFoundException("Patient not found with id " + patientId));
-            patientResponseDTO=ValueMapper.convertToDTO(patient);
-           
-            log.debug("PatientService:getPatientById retrieving patient from database  {}", ValueMapper.jsonAsString(patientResponseDTO));
+            PatientResponseDTO patientResponseDTO=ValueMapper.convertToDTO(patient);
+            patientResponse=CommonService.buildResponse(patientResponseDTO);
+            log.debug("PatientService:getPatientById retrieving patient from database  {}", ValueMapper.jsonAsString(patientResponse));
 
         } catch (Exception ex) {
             log.error("Exception occurred while retrieving patient from database , Exception message {}", ex.getMessage());
@@ -72,6 +73,6 @@ public class GetPatientServiceImpl implements GetPatientService {
         }
 
         log.info("PatientService:getPatientById execution ended.");
-        return patientResponseDTO;
+        return patientResponse;
 	}
 }

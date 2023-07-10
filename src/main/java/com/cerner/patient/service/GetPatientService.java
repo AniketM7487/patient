@@ -3,11 +3,12 @@ package com.cerner.patient.service;
 import java.util.List;
 
 import com.cerner.patient.dto.PatientResponseDTO;
+import com.cerner.patient.response.GenericApiResponse;
 
 public interface GetPatientService {
 
-	List<PatientResponseDTO> getPatients();
+	GenericApiResponse<List<PatientResponseDTO>> getPatients();
 
-	PatientResponseDTO getPatientById(Long patientId);
+	GenericApiResponse<PatientResponseDTO> getPatientById(Long patientId);
 
 }

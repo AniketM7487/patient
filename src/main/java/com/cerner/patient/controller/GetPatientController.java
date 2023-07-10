@@ -27,13 +27,7 @@ public class GetPatientController {
 	
 	@GetMapping
 	public ResponseEntity<GenericApiResponse> getPatients() {
-		List<PatientResponseDTO> patients = patientService.getPatients();
-        //Builder Design pattern (to avoid complex object creation headache)
-		GenericApiResponse<List<PatientResponseDTO>> responseDTO = GenericApiResponse
-                .<List<PatientResponseDTO>>builder()
-                .status("SUCCESS")
-                .data(patients)
-                .build();
+		GenericApiResponse<List<PatientResponseDTO>> responseDTO = patientService.getPatients();
 
         log.info("PatientController::getPatients response {}", ValueMapper.jsonAsString(responseDTO));
 
@@ -43,15 +37,10 @@ public class GetPatientController {
 	@GetMapping("/{patientId}")
 	public ResponseEntity<GenericApiResponse> getPatient(@PathVariable Long patientId) {
 		log.info("PatientController::getPatient by id  {}", patientId);
-		PatientResponseDTO patient = patientService.getPatientById(patientId);
-		GenericApiResponse<PatientResponseDTO> responseDTO = GenericApiResponse
-                .<PatientResponseDTO>builder()
-                .status("SUCCESS")
-                .data(patient)
-                .build();
+		GenericApiResponse<PatientResponseDTO> patientResponseDTO= patientService.getPatientById(patientId);
 
-        log.info("PatientController::getPatients response {}", ValueMapper.jsonAsString(responseDTO));
+        log.info("PatientController::getPatients response {}", ValueMapper.jsonAsString(patientResponseDTO));
 
-        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+        return new ResponseEntity<>(patientResponseDTO, HttpStatus.OK);
 	}
 }
