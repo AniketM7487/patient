@@ -5,6 +5,8 @@ import com.cerner.patient.dto.PatientRequestDTO;
 import com.cerner.patient.dto.PatientResponseDTO;
 import com.cerner.patient.entity.Address;
 import com.cerner.patient.entity.Patient;
+import com.cerner.patient.exception.PatientExistException;
+import com.cerner.patient.exception.PatientNotFoundException;
 import com.cerner.patient.mapper.CommonService;
 import com.cerner.patient.repository.PatientRepository;
 import com.cerner.patient.response.GenericApiResponse;
@@ -13,6 +15,9 @@ import com.cerner.patient.service.impl.DeletePatientServiceImpl;
 import com.cerner.patient.service.impl.GetPatientServiceImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -37,13 +42,23 @@ public class DeletePatientServiceTest {
 	@InjectMocks
 	private DeletePatientServiceImpl deletePatientService;
 	
+	private Patient patient;
+	
+	@BeforeEach
+    void setup() {
+		patient=new Patient(1l, "Test", "Test1", new Address(1l,"Pune","Pune","Maharashtra","411046"), LocalDate.now(), "Male", "918888888888");
+    }
+	
 	@Test
-    public void givenPatient_whenGetPatientById_thenReturnPatient(){
-		Patient patient=new Patient(1l, "Ramesh", "Ramesh", new Address(1l,"test","test","test","Test"), LocalDate.now(), "Male", "844620474888");
+    public void deletePatient_whenDeletePatient_shouldReturnSuccess(){
 		when(patientRepository.findById(1l)).thenReturn(Optional.of(patient));
 		GenericApiResponse<PatientResponseDTO> patientResponse=deletePatientService.deletePatient(1l);
-//		assertThat(patientResponse.getData().getFirstName()).isNotNull();
         assertThat(patientResponse.getStatus()).isEqualTo("SUCCESS");
+	}
+	
+	@Test
+    public void deletePatient_whenPatientIdNotExist_shouldReturnPatientNotFoundException(){
+		assertThrows(PatientNotFoundException.class,() ->  deletePatientService.deletePatient(1l));
 	}
 	
 	

@@ -1,9 +1,6 @@
 package com.cerner.patient.dto;
 
-import java.util.Date;
-
 import javax.validation.constraints.NotBlank;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

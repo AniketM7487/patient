@@ -9,12 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.cerner.patient.dto.PatientResponseDTO;
 import com.cerner.patient.mapper.ValueMapper;
 import com.cerner.patient.response.GenericApiResponse;
 import com.cerner.patient.service.GetPatientService;
-
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
@@ -39,7 +37,7 @@ public class GetPatientController {
 		log.info("PatientController::getPatient by id  {}", patientId);
 		GenericApiResponse<PatientResponseDTO> patientResponseDTO= patientService.getPatientById(patientId);
 
-        log.info("PatientController::getPatients response {}", ValueMapper.jsonAsString(patientResponseDTO));
+        log.info("PatientController::getPatient by id response {}", ValueMapper.jsonAsString(patientResponseDTO));
 
         return new ResponseEntity<>(patientResponseDTO, HttpStatus.OK);
 	}

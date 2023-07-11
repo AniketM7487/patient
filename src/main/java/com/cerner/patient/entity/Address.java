@@ -25,10 +25,14 @@ public class Address extends AbstractEntity {
 	@SequenceGenerator(name = "address_seq", sequenceName = "address_seq", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "address_seq")
 	private Long key;
+	
 	private String address;
+	
 	private String city;
+	
 	@Column(name = "states")
 	private String state;
+	
 	@Column(name = "pincode")
 	private String pinCode;
 }

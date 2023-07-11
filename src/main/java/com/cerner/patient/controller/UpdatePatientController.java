@@ -10,13 +10,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.cerner.patient.dto.PatientRequestDTO;
 import com.cerner.patient.dto.PatientResponseDTO;
 import com.cerner.patient.mapper.ValueMapper;
 import com.cerner.patient.response.GenericApiResponse;
 import com.cerner.patient.service.UpdatePatientService;
-
 import lombok.extern.slf4j.Slf4j;
 
 @RestController

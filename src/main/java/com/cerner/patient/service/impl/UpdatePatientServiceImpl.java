@@ -27,31 +27,27 @@ public class UpdatePatientServiceImpl implements UpdatePatientService {
 	@Autowired
 	private CommonService commonService;
 
-	public GenericApiResponse<PatientResponseDTO> updatePatient(Long patientId, PatientRequestDTO patientRequestDTO) {
+	public GenericApiResponse<PatientResponseDTO> updatePatient(Long patientId, PatientRequestDTO patientRequestDTO)
+			throws PatientBusinessException {
 		GenericApiResponse<PatientResponseDTO> patientResponse = null;
-		PatientResponseDTO patientResponseDTO=null;
-		try {
-			
-            log.info("PatientService:updatePatient execution started.");
-            if(commonService.isDuplicate(patientRequestDTO)) {
-            	throw new PatientExistException("Exception occurred while add a new Patient. Patient already exits.");
-			} else {
-				Patient patient = patientRepository.findById(patientId)
-						.orElseThrow(() -> new PatientNotFoundException("Patient not found with id " + patientId));
+		PatientResponseDTO patientResponseDTO = null;
 
-				patient = ValueMapper.updateEntity(patient, patientRequestDTO);
-				Patient patientResults = patientRepository.save(patient);
-				patientResponseDTO = ValueMapper.convertToDTO(patientResults);
-			}
-            patientResponse=CommonService.buildResponse(patientResponseDTO);
-            log.debug("PatientService:updatePatient retrieving patient from database  {}", ValueMapper.jsonAsString(patientResponse));
+		log.info("PatientService:updatePatient execution started.");
+		if (commonService.isDuplicate(patientRequestDTO)) {
+			throw new PatientExistException("Exception occurred while add a new Patient. Patient already exits.");
+		} else {
+			Patient patient = patientRepository.findById(patientId)
+					.orElseThrow(() -> new PatientNotFoundException("Patient not found with id " + patientId));
 
-        } catch (Exception ex) {
-            log.error("Exception occurred while retrieving patient from database , Exception message {}", ex.getMessage());
-            throw new PatientBusinessException("Exception occurred while fetch patient from Database");
-        }
+			patient = ValueMapper.updateEntity(patient, patientRequestDTO);
+			Patient patientResults = patientRepository.save(patient);
+			patientResponseDTO = ValueMapper.convertToDTO(patientResults);
+		}
+		patientResponse = CommonService.buildResponse(patientResponseDTO);
+		log.debug("PatientService:updatePatient retrieving patient from database  {}",
+				ValueMapper.jsonAsString(patientResponse));
 
-        log.info("PatientService:updatePatient execution ended.");
-        return patientResponse;
+		log.info("PatientService:updatePatient execution ended.");
+		return patientResponse;
 	}
 }
