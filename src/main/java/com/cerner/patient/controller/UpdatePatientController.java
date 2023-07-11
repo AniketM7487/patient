@@ -17,14 +17,30 @@ import com.cerner.patient.response.GenericApiResponse;
 import com.cerner.patient.service.UpdatePatientService;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * The Class UpdatePatientController used to update Patient
+ * @author Aniket
+ * @version 0.1
+ * @since 2023
+ */
 @RestController
 @RequestMapping("/api/v1/patient")
+
+/** The Constant log. */
 @Slf4j
 public class UpdatePatientController {
 	
+	/** The patient service. */
 	@Autowired
 	private UpdatePatientService patientService;
 	
+	/**
+	 * Update patient.
+	 *
+	 * @param patientId the patient id
+	 * @param patientRequestDTO the patient request DTO
+	 * @return the response entity
+	 */
 	@PutMapping("/{patientId}")
 	public ResponseEntity<GenericApiResponse> updatePatient(@PathVariable Long patientId,@Valid @RequestBody PatientRequestDTO patientRequestDTO) {
 		log.info("PatientController::updatePatient by id  {}", patientId);

@@ -19,18 +19,30 @@ import com.cerner.patient.response.GenericApiResponse;
 import com.cerner.patient.service.UpdatePatientService;
 import static org.mockito.Mockito.when;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UpdatePatientControllerTest.
+ */
 @WebMvcTest(UpdatePatientController.class)
 public class UpdatePatientControllerTest {
 
+	/** The update patient controller. */
 	@InjectMocks
 	UpdatePatientController updatePatientController;
 	
+	/** The mock mvc. */
 	@Autowired
     private MockMvc mockMvc;
 	
+	/** The update patient service. */
 	@MockBean
 	private UpdatePatientService updatePatientService;
 	
+	/**
+	 * Update patient test.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Test
 	public void updatePatientTest() throws Exception 
 	{
@@ -49,6 +61,12 @@ public class UpdatePatientControllerTest {
 				.andExpect(MockMvcResultMatchers.jsonPath("$.status").value("SUCCESS"));
 	}
 	
+	/**
+	 * Builds the response.
+	 *
+	 * @param patientResponseDTO the patient response DTO
+	 * @return the generic api response
+	 */
 	public GenericApiResponse<PatientResponseDTO> buildResponse(PatientResponseDTO patientResponseDTO) {
 		return GenericApiResponse
                 .<PatientResponseDTO>builder()

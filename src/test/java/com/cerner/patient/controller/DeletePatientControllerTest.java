@@ -18,18 +18,30 @@ import com.cerner.patient.response.GenericApiResponse;
 import com.cerner.patient.service.DeletePatientService;
 import static org.mockito.Mockito.when;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DeletePatientControllerTest.
+ */
 @WebMvcTest(DeletePatientController.class)
 public class DeletePatientControllerTest {
 
+	/** The delete patient controller. */
 	@InjectMocks
 	DeletePatientController deletePatientController;
 	
+	/** The mock mvc. */
 	@Autowired
     private MockMvc mockMvc;
 	
+	/** The delete patient service. */
 	@MockBean
 	private DeletePatientService deletePatientService;
 
+	/**
+	 * Delete patient test.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Test
 	public void deletePatientTest() throws Exception 
 	{
@@ -44,6 +56,12 @@ public class DeletePatientControllerTest {
 				.andExpect(MockMvcResultMatchers.jsonPath("$.status").isNotEmpty());
 	}
 
+	/**
+	 * Builds the response.
+	 *
+	 * @param patientResponseDTO the patient response DTO
+	 * @return the generic api response
+	 */
 	public GenericApiResponse<PatientResponseDTO> buildResponse(PatientResponseDTO patientResponseDTO) {
 		return GenericApiResponse
                 .<PatientResponseDTO>builder()

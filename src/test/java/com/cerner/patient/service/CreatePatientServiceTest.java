@@ -26,21 +26,34 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CreatePatientServiceTest.
+ */
 @SpringBootTest
 public class CreatePatientServiceTest {
 
+	/** The patient repository. */
 	@Mock
 	private PatientRepository patientRepository;
 	
+	/** The common service. */
 	@Mock
 	private CommonService commonService;
+	
+	/** The create patient service. */
 	@InjectMocks
 	private CreatePatientServiceImpl createPatientService;
 	
+	/** The patient request DTO. */
 	private PatientRequestDTO patientRequestDTO;
 	
+	/** The patient. */
 	private Patient patient;
 	
+	/**
+	 * Setup.
+	 */
 	@BeforeEach
     void setup() {
 		patientRequestDTO = PatientRequestDTO.builder().firstName("Test").lastName("Test1")
@@ -51,6 +64,9 @@ public class CreatePatientServiceTest {
 		when(patientRepository.save(ArgumentMatchers.any(Patient.class))).thenReturn(patient);
     }
 	
+	/**
+	 * Adds the patient when save patient should return patient.
+	 */
 	@Test
 	public void addPatient_whenSavePatient_shouldReturnPatient() {
 		when(patientRepository.findByFirstNameAndLastName("Ramesh","Ramesh")).thenReturn(null);
@@ -59,6 +75,9 @@ public class CreatePatientServiceTest {
 		assertThat(created.getStatus()).isSameAs("SUCCESS");
 	}
 	
+	/**
+	 * Adds the patient when duplicate patient should return patient exist exception.
+	 */
 	@Test
 	public void addPatient_whenDuplicatePatient_shouldReturnPatientExistException() {
 		when(commonService.isDuplicate(patientRequestDTO)).thenReturn(true);

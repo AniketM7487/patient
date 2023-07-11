@@ -16,14 +16,29 @@ import com.cerner.patient.response.GenericApiResponse;
 import com.cerner.patient.service.CreatePatientService;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * The Class CreatePatientController used to create Patient
+ * @author Aniket
+ * @version 0.1
+ * @since 2023
+ */
 @RestController
 @RequestMapping("/api/v1/patient")
+
+/** The Constant log. */
 @Slf4j
 public class CreatePatientController {
 	
+	/** The patient service. */
 	@Autowired
 	private CreatePatientService patientService;
 	
+	/**
+	 * Adds the patient.
+	 *
+	 * @param patientRequestDTO the patient request DTO
+	 * @return the response entity
+	 */
 	@PostMapping
 	public ResponseEntity<GenericApiResponse> addPatient(@Valid @RequestBody PatientRequestDTO patientRequestDTO) {
 		log.info("PatientController::addPatient request body {}", ValueMapper.jsonAsString(patientRequestDTO));

@@ -10,8 +10,18 @@ import com.cerner.patient.entity.Patient;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ValueMapper.
+ */
 public class ValueMapper {
 
+	/**
+	 * Json as string.
+	 *
+	 * @param obj the obj
+	 * @return the string
+	 */
 	public static String jsonAsString(Object obj){
         try {
             return new ObjectMapper().writeValueAsString(obj);
@@ -21,6 +31,12 @@ public class ValueMapper {
         return null;
     }
 
+	/**
+	 * Convert to entity.
+	 *
+	 * @param patientRequestDTO the patient request DTO
+	 * @return the patient
+	 */
 	public static Patient convertToEntity(PatientRequestDTO patientRequestDTO) {
 		Patient patient=new Patient();
 		Address address=new Address();
@@ -37,6 +53,12 @@ public class ValueMapper {
 		return patient;
 	}
 
+	/**
+	 * Convert to DTO.
+	 *
+	 * @param patientResults the patient results
+	 * @return the patient response DTO
+	 */
 	public static PatientResponseDTO convertToDTO(Patient patientResults) {
 		PatientResponseDTO patient=new PatientResponseDTO();
 		AddressDTO address=new AddressDTO();
@@ -54,6 +76,13 @@ public class ValueMapper {
 		return patient;
 	}
 	
+	/**
+	 * Update entity.
+	 *
+	 * @param patient the patient
+	 * @param patientRequestDTO the patient request DTO
+	 * @return the patient
+	 */
 	public static Patient updateEntity(Patient patient,PatientRequestDTO patientRequestDTO) {
 		Address address=patient.getAddress();
 		patient.setFirstName(patientRequestDTO.getFirstName());

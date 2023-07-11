@@ -20,22 +20,37 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GetPatientServiceTest.
+ */
 @SpringBootTest
 public class GetPatientServiceTest {
 
+	/** The patient repository. */
 	@Mock
 	private PatientRepository patientRepository;
 	
+	/** The get patient service. */
 	@InjectMocks
 	private GetPatientServiceImpl getPatientService;
 	
+	/** The patient. */
 	private Patient patient;
 	
+	/**
+	 * Setup.
+	 */
 	@BeforeEach
     void setup() {
 		patient=new Patient(1l, "Test", "Test1", new Address(1l,"Pune","Pune","Maharashtra","411046"), LocalDate.now(), "Male", "918888888888");
     }
 	
+	/**
+	 * Gets the patients when get all patient should return patient list.
+	 *
+	 * @return the patients when get all patient should return patient list
+	 */
 	@Test
     public void getPatients_whenGetAllPatient_shouldReturnPatientList(){
 		List<Patient> patientList = new ArrayList<Patient>();
@@ -48,6 +63,11 @@ public class GetPatientServiceTest {
         assertThat(patientList.size()).isEqualTo(2);
 	}
 	
+	/**
+	 * Gets the patients when get all patient should return empty patient list.
+	 *
+	 * @return the patients when get all patient should return empty patient list
+	 */
 	@Test
     public void getPatients_whenGetAllPatient_shouldReturnEmptyPatientList(){
 		List<Patient> patientList = new ArrayList<Patient>();
@@ -57,6 +77,11 @@ public class GetPatientServiceTest {
 	}
 	
 	
+	/**
+	 * Gets the patient by id when get patient by id should return patient.
+	 *
+	 * @return the patient by id when get patient by id should return patient
+	 */
 	@Test
     public void getPatientById_whenGetPatientById_shouldReturnPatient(){
 		when(patientRepository.findById(1l)).thenReturn(Optional.of(patient));
@@ -65,6 +90,11 @@ public class GetPatientServiceTest {
         assertThat(patientResponse.getStatus()).isEqualTo("SUCCESS");
 	}
 	
+	/**
+	 * Gets the patient by id when patient by id not found should return patient not found exception.
+	 *
+	 * @return the patient by id when patient by id not found should return patient not found exception
+	 */
 	@Test
     public void getPatientById_whenPatientByIdNotFound_shouldReturnPatientNotFoundException(){
 		assertThrows(PatientNotFoundException.class,() ->  getPatientService.getPatientById(1l));

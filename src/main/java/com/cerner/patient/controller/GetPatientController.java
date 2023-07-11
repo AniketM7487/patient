@@ -15,14 +15,28 @@ import com.cerner.patient.response.GenericApiResponse;
 import com.cerner.patient.service.GetPatientService;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * The Class GetPatientController used to get Patient Details
+ * @author Aniket
+ * @version 0.1
+ * @since 2023
+ */
 @RestController
 @RequestMapping("/api/v1/patient")
+
+/** The Constant log. */
 @Slf4j
 public class GetPatientController {
 	
+	/** The patient service. */
 	@Autowired
 	private GetPatientService patientService;
 	
+	/**
+	 * Gets the patients.
+	 *
+	 * @return the patients
+	 */
 	@GetMapping
 	public ResponseEntity<GenericApiResponse> getPatients() {
 		GenericApiResponse<List<PatientResponseDTO>> responseDTO = patientService.getPatients();
@@ -32,6 +46,12 @@ public class GetPatientController {
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
 	}
 	
+	/**
+	 * Gets the patient by patient ID
+	 *
+	 * @param patientId the patient id
+	 * @return the patient
+	 */
 	@GetMapping("/{patientId}")
 	public ResponseEntity<GenericApiResponse> getPatient(@PathVariable Long patientId) {
 		log.info("PatientController::getPatient by id  {}", patientId);

@@ -32,21 +32,34 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDate;
 import java.util.Optional;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UpdatePatientServiceTest.
+ */
 @SpringBootTest
 public class UpdatePatientServiceTest {
 
+	/** The patient repository. */
 	@Mock
 	private PatientRepository patientRepository;
 	
+	/** The common service. */
 	@Mock
 	private CommonService commonService;
+	
+	/** The update patient service. */
 	@InjectMocks
 	private UpdatePatientServiceImpl updatePatientService;
 	
+	/** The patient request DTO. */
 	private PatientRequestDTO patientRequestDTO;
 	
+	/** The patient. */
 	private Patient patient;
 	
+	/**
+	 * Setup.
+	 */
 	@BeforeEach
     void setup() {
 		patientRequestDTO = PatientRequestDTO.builder().firstName("Test").lastName("Test1")
@@ -57,6 +70,9 @@ public class UpdatePatientServiceTest {
 		when(patientRepository.save(ArgumentMatchers.any(Patient.class))).thenReturn(patient);
     }
 	
+	/**
+	 * Update patient when update patient should return patient.
+	 */
 	@Test
 	public void updatePatient_whenUpdatePatient_shouldReturnPatient() {
 		when(patientRepository.findByFirstNameAndLastName("Ramesh","Ramesh")).thenReturn(null);
@@ -66,6 +82,9 @@ public class UpdatePatientServiceTest {
 		assertThat(created.getStatus()).isSameAs("SUCCESS");
 	}
 	
+	/**
+	 * Update patient when duplicate patient should return patient exist exception.
+	 */
 	@Test
 	public void updatePatient_whenDuplicatePatient_shouldReturnPatientExistException() {
 		when(commonService.isDuplicate(patientRequestDTO)).thenReturn(true);
@@ -76,6 +95,9 @@ public class UpdatePatientServiceTest {
 		});
 	}
 	
+	/**
+	 * Update patient when patient id not found should return patient not found exception.
+	 */
 	@Test
     public void updatePatient_whenPatientIdNotFound_shouldReturnPatientNotFoundException(){
 		assertThrows(PatientNotFoundException.class,() ->  updatePatientService.updatePatient(1l,patientRequestDTO));

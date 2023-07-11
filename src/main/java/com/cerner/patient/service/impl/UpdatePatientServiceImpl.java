@@ -17,16 +17,30 @@ import com.cerner.patient.service.UpdatePatientService;
 
 import lombok.extern.slf4j.Slf4j;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UpdatePatientServiceImpl.
+ * @author Aniket
+ * @version 0.1
+ * @since 2023
+ */
 @Service
+
+/** The Constant log. */
 @Slf4j
 public class UpdatePatientServiceImpl implements UpdatePatientService {
 	
+	/** The patient repository. */
 	@Autowired
 	private PatientRepository patientRepository;
 
+	/** The common service. */
 	@Autowired
 	private CommonService commonService;
 
+	/* (non-Javadoc)
+	 * @see com.cerner.patient.service.UpdatePatientService#updatePatient(java.lang.Long, com.cerner.patient.dto.PatientRequestDTO)
+	 */
 	public GenericApiResponse<PatientResponseDTO> updatePatient(Long patientId, PatientRequestDTO patientRequestDTO)
 			throws PatientBusinessException {
 		GenericApiResponse<PatientResponseDTO> patientResponse = null;

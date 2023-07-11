@@ -20,18 +20,31 @@ import com.cerner.patient.response.GenericApiResponse;
 import com.cerner.patient.service.GetPatientService;
 import static org.mockito.Mockito.when;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GetPatientControllerTest.
+ */
 @WebMvcTest(GetPatientController.class)
 public class GetPatientControllerTest {
 
+	/** The get patient controller. */
 	@InjectMocks
 	GetPatientController getPatientController;
 	
+	/** The mock mvc. */
 	@Autowired
     private MockMvc mockMvc;
 	
+	/** The get patient service. */
 	@MockBean
 	private GetPatientService getPatientService;
 
+	/**
+	 * Gets the patients test.
+	 *
+	 * @return the patients test
+	 * @throws Exception the exception
+	 */
 	@Test
 	public void getPatientsTest() throws Exception 
 	{
@@ -48,6 +61,12 @@ public class GetPatientControllerTest {
 //	      .andExpect(MockMvcResultMatchers.jsonPath("$.employees[*].employeeId").isNotEmpty());
 	}
 	
+	/**
+	 * Gets the patient test.
+	 *
+	 * @return the patient test
+	 * @throws Exception the exception
+	 */
 	@Test
 	public void getPatientTest() throws Exception 
 	{
@@ -63,6 +82,12 @@ public class GetPatientControllerTest {
 //	      .andExpect(MockMvcResultMatchers.jsonPath("$.employees[*].employeeId").isNotEmpty());
 	}
 	
+	/**
+	 * Builds the response for list.
+	 *
+	 * @param patients the patients
+	 * @return the generic api response
+	 */
 	public GenericApiResponse<List<PatientResponseDTO>> buildResponseForList(List<PatientResponseDTO> patients) {
 		return GenericApiResponse
                 .<List<PatientResponseDTO>>builder()
@@ -70,6 +95,13 @@ public class GetPatientControllerTest {
                 .data(patients)
                 .build();
 	}
+	
+	/**
+	 * Builds the response.
+	 *
+	 * @param patientResponseDTO the patient response DTO
+	 * @return the generic api response
+	 */
 	public GenericApiResponse<PatientResponseDTO> buildResponse(PatientResponseDTO patientResponseDTO) {
 		return GenericApiResponse
                 .<PatientResponseDTO>builder()

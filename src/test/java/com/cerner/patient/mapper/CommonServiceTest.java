@@ -13,15 +13,24 @@ import com.cerner.patient.entity.Address;
 import com.cerner.patient.entity.Patient;
 import com.cerner.patient.repository.PatientRepository;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CommonServiceTest.
+ */
 @SpringBootTest
 public class CommonServiceTest {
 
+	/** The patient repository. */
 	@Mock
 	private PatientRepository patientRepository;
 	
+	/** The common service. */
 	@InjectMocks
 	private CommonService commonService;
 	
+	/**
+	 * Checks if is duplicate patient already exist true.
+	 */
 	@Test
 	public void isDuplicate_PatientAlreadyExist_True() {
 		PatientRequestDTO patientReq = PatientRequestDTO.builder().firstName("Ramesh").lastName("Ramesh")
@@ -35,6 +44,9 @@ public class CommonServiceTest {
 		
 	}
 	
+	/**
+	 * Checks if is duplicate patient already exist false.
+	 */
 	@Test
 	public void isDuplicate_PatientAlreadyExist_False() {
 		PatientRequestDTO patientReq = PatientRequestDTO.builder().firstName("Ramesh").lastName("Ramesh")

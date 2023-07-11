@@ -13,9 +13,19 @@ import org.springframework.web.context.request.WebRequest;
 import com.cerner.patient.response.ErrorResponse;
 import com.cerner.patient.response.GenericApiResponse;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CustomExceptionHandler.
+ */
 @RestControllerAdvice
 public class CustomExceptionHandler {
 
+	/**
+	 * Handle method argument exception.
+	 *
+	 * @param exception the exception
+	 * @return the generic api response
+	 */
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public GenericApiResponse<?> handleMethodArgumentException(MethodArgumentNotValidException exception) {
@@ -31,6 +41,13 @@ public class CustomExceptionHandler {
 		return serviceResponse;
 	}
 
+	/**
+	 * Resource not found exception.
+	 *
+	 * @param ex the ex
+	 * @param request the request
+	 * @return the generic api response
+	 */
 	@ExceptionHandler(PatientNotFoundException.class)
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
 	public GenericApiResponse<?> resourceNotFoundException(PatientNotFoundException ex, WebRequest request) {
@@ -41,6 +58,13 @@ public class CustomExceptionHandler {
 		return response;
 	}
 
+	/**
+	 * Patient exist exception.
+	 *
+	 * @param ex the ex
+	 * @param request the request
+	 * @return the generic api response
+	 */
 	@ExceptionHandler(PatientExistException.class)
 	@ResponseStatus(value = HttpStatus.ALREADY_REPORTED)
 	public GenericApiResponse<?> patientExistException(PatientExistException ex, WebRequest request) {
@@ -52,6 +76,12 @@ public class CustomExceptionHandler {
 		return response;
 	}
 
+	/**
+	 * Handle service exception.
+	 *
+	 * @param exception the exception
+	 * @return the generic api response
+	 */
 	@ExceptionHandler(PatientBusinessException.class)
 	public GenericApiResponse<?> handleServiceException(PatientBusinessException exception) {
 		GenericApiResponse<?> response = new GenericApiResponse<>();

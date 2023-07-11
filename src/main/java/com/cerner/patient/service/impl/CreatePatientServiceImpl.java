@@ -14,16 +14,30 @@ import com.cerner.patient.response.GenericApiResponse;
 import com.cerner.patient.service.CreatePatientService;
 import lombok.extern.slf4j.Slf4j;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CreatePatientServiceImpl.
+ * @author Aniket
+ * @version 0.1
+ * @since 2023
+ */
 @Service
+
+/** The Constant log. */
 @Slf4j
 public class CreatePatientServiceImpl implements CreatePatientService {
 
+	/** The patient repository. */
 	@Autowired
 	private PatientRepository patientRepository;
 
+	/** The common service. */
 	@Autowired
 	private CommonService commonService;
 
+	/* (non-Javadoc)
+	 * @see com.cerner.patient.service.CreatePatientService#addPatient(com.cerner.patient.dto.PatientRequestDTO)
+	 */
 	public GenericApiResponse<PatientResponseDTO> addPatient(PatientRequestDTO patientRequestDTO)
 			throws PatientBusinessException {
 		GenericApiResponse<PatientResponseDTO> patientResponse;

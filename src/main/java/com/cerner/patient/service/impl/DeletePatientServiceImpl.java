@@ -12,13 +12,26 @@ import com.cerner.patient.response.GenericApiResponse;
 import com.cerner.patient.service.DeletePatientService;
 import lombok.extern.slf4j.Slf4j;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DeletePatientServiceImpl.
+ * @author Aniket
+ * @version 0.1
+ * @since 2023
+ */
 @Service
+
+/** The Constant log. */
 @Slf4j
 public class DeletePatientServiceImpl implements DeletePatientService {
 	
+	/** The patient repository. */
 	@Autowired
 	private PatientRepository patientRepository;
 
+	/* (non-Javadoc)
+	 * @see com.cerner.patient.service.DeletePatientService#deletePatient(java.lang.Long)
+	 */
 	public GenericApiResponse<PatientResponseDTO> deletePatient(Long patientId) throws PatientBusinessException {
 		GenericApiResponse<PatientResponseDTO> response = null;
 

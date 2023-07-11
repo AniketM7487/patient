@@ -16,13 +16,26 @@ import com.cerner.patient.response.GenericApiResponse;
 import com.cerner.patient.service.GetPatientService;
 import lombok.extern.slf4j.Slf4j;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GetPatientServiceImpl.
+ * @author Aniket
+ * @version 0.1
+ * @since 2023
+ */
 @Service
+
+/** The Constant log. */
 @Slf4j
 public class GetPatientServiceImpl implements GetPatientService {
 	
+	/** The patient repository. */
 	@Autowired
 	private PatientRepository patientRepository;
 
+	/* (non-Javadoc)
+	 * @see com.cerner.patient.service.GetPatientService#getPatients()
+	 */
 	public GenericApiResponse<List<PatientResponseDTO>> getPatients() throws PatientBusinessException {
 		List<PatientResponseDTO> patientResponseDTOS = null;
 		GenericApiResponse<List<PatientResponseDTO>> patientResponse = null;
@@ -44,6 +57,9 @@ public class GetPatientServiceImpl implements GetPatientService {
 
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.cerner.patient.service.GetPatientService#getPatientById(java.lang.Long)
+	 */
 	public GenericApiResponse<PatientResponseDTO> getPatientById(Long patientId) throws PatientBusinessException {
 		GenericApiResponse<PatientResponseDTO> patientResponse = null;
 

@@ -13,14 +13,29 @@ import com.cerner.patient.response.GenericApiResponse;
 import com.cerner.patient.service.DeletePatientService;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * The Class DeletePatientController used to delete patient
+ * @author Aniket
+ * @version 0.1
+ * @since 2023
+ */
 @RestController
 @RequestMapping("/api/v1/patient")
+
+/** The Constant log. */
 @Slf4j
 public class DeletePatientController {
 	
+	/** The patient service. */
 	@Autowired
 	private DeletePatientService patientService;
 	
+	/**
+	 * Delete patient.
+	 *
+	 * @param patientId the patient id
+	 * @return the response entity
+	 */
 	@DeleteMapping("/{patientId}")
 	public ResponseEntity<GenericApiResponse> deletePatient(@PathVariable Long patientId) {
 		log.info("PatientController::deletePatient by id  {}", patientId);

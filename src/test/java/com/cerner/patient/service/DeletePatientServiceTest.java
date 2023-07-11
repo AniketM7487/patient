@@ -33,22 +33,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DeletePatientServiceTest.
+ */
 @SpringBootTest
 public class DeletePatientServiceTest {
 
+	/** The patient repository. */
 	@Mock
 	private PatientRepository patientRepository;
 	
+	/** The delete patient service. */
 	@InjectMocks
 	private DeletePatientServiceImpl deletePatientService;
 	
+	/** The patient. */
 	private Patient patient;
 	
+	/**
+	 * Setup.
+	 */
 	@BeforeEach
     void setup() {
 		patient=new Patient(1l, "Test", "Test1", new Address(1l,"Pune","Pune","Maharashtra","411046"), LocalDate.now(), "Male", "918888888888");
     }
 	
+	/**
+	 * Delete patient when delete patient should return success.
+	 */
 	@Test
     public void deletePatient_whenDeletePatient_shouldReturnSuccess(){
 		when(patientRepository.findById(1l)).thenReturn(Optional.of(patient));
@@ -56,6 +69,9 @@ public class DeletePatientServiceTest {
         assertThat(patientResponse.getStatus()).isEqualTo("SUCCESS");
 	}
 	
+	/**
+	 * Delete patient when patient id not exist should return patient not found exception.
+	 */
 	@Test
     public void deletePatient_whenPatientIdNotExist_shouldReturnPatientNotFoundException(){
 		assertThrows(PatientNotFoundException.class,() ->  deletePatientService.deletePatient(1l));
