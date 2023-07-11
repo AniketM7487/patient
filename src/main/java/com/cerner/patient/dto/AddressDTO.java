@@ -1,17 +1,19 @@
 package com.cerner.patient.dto;
 
 import javax.validation.constraints.NotBlank;
+
+import com.cerner.patient.Generated;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
 @Builder
+@Generated
 public class AddressDTO {
 
 	@NotBlank(message = "Address shouldn't be NULL OR EMPTY")
