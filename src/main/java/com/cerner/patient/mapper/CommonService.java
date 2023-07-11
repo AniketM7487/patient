@@ -67,4 +67,20 @@ public class CommonService {
 		}
 	}
 
+
+	/**
+	 * Checks if is duplicate patient while update
+	 * @param patientId
+	 * @param patientRequestDTO
+	 * @return
+	 */
+	public boolean isDuplicateForUpdate(Long patientId, PatientRequestDTO patientRequestDTO) {
+		Patient patient=patientRepository.findByFirstNameAndLastName(patientRequestDTO.getFirstName(),patientRequestDTO.getLastName());
+		if(patient!=null && !patient.getKey().equals(patientId)) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
 }

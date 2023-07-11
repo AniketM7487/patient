@@ -49,7 +49,6 @@ public class CustomExceptionHandler {
 	 * @return the generic api response
 	 */
 	@ExceptionHandler(PatientNotFoundException.class)
-	@ResponseStatus(value = HttpStatus.NOT_FOUND)
 	public GenericApiResponse<?> resourceNotFoundException(PatientNotFoundException ex, WebRequest request) {
 		GenericApiResponse<?> response = new GenericApiResponse<>();
 		response.setStatus("FAILED");

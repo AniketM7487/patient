@@ -52,7 +52,7 @@ public class DeletePatientControllerTest {
 		GenericApiResponse<PatientResponseDTO> patient = buildResponse(patientRes);
 		when(deletePatientService.deletePatient(1l)).thenReturn(patient);
 		mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/patient/1").accept(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isNoContent())
+				.andDo(print()).andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.status").isNotEmpty());
 	}
 

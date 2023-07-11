@@ -43,7 +43,7 @@ public class DeletePatientController {
 
         log.info("PatientController::deletePatient response {}", ValueMapper.jsonAsString(responseDTO));
 
-        return new ResponseEntity<>(responseDTO,HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(responseDTO,HttpStatus.OK);
 	}
 	
 

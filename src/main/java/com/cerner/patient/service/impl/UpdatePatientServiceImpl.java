@@ -47,8 +47,8 @@ public class UpdatePatientServiceImpl implements UpdatePatientService {
 		PatientResponseDTO patientResponseDTO = null;
 
 		log.info("PatientService:updatePatient execution started.");
-		if (commonService.isDuplicate(patientRequestDTO)) {
-			throw new PatientExistException("Exception occurred while add a new Patient. Patient already exits.");
+		if (commonService.isDuplicateForUpdate(patientId,patientRequestDTO)) {
+			throw new PatientExistException("Exception occurred while update Patient.Patient already exits.");
 		} else {
 			Patient patient = patientRepository.findById(patientId)
 					.orElseThrow(() -> new PatientNotFoundException("Patient not found with id " + patientId));

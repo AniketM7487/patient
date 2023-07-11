@@ -77,7 +77,7 @@ public class UpdatePatientServiceTest {
 	public void updatePatient_whenUpdatePatient_shouldReturnPatient() {
 		when(patientRepository.findByFirstNameAndLastName("Ramesh","Ramesh")).thenReturn(null);
 		when(patientRepository.findById(1l)).thenReturn(Optional.of(patient));
-		when(commonService.isDuplicate(patientRequestDTO)).thenReturn(false);
+		when(commonService.isDuplicateForUpdate(2l,patientRequestDTO)).thenReturn(false);
 		GenericApiResponse<PatientResponseDTO> created = updatePatientService.updatePatient(1l,patientRequestDTO);
 		assertThat(created.getStatus()).isSameAs("SUCCESS");
 	}
@@ -87,7 +87,7 @@ public class UpdatePatientServiceTest {
 	 */
 	@Test
 	public void updatePatient_whenDuplicatePatient_shouldReturnPatientExistException() {
-		when(commonService.isDuplicate(patientRequestDTO)).thenReturn(true);
+		when(commonService.isDuplicateForUpdate(1l,patientRequestDTO)).thenReturn(true);
 		assertThrows(PatientExistException.class, () -> {
 
 			updatePatientService.updatePatient(1l,patientRequestDTO);
