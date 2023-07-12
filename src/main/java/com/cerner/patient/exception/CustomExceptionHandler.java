@@ -32,7 +32,7 @@ public class CustomExceptionHandler {
 		GenericApiResponse<?> serviceResponse = new GenericApiResponse<>();
 		List<ErrorResponse> errors = new ArrayList<>();
 		exception.getBindingResult().getFieldErrors().forEach(error -> {
-			ErrorResponse errorDTO = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), new Date(),
+			ErrorResponse errorDTO = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), new Date(),
 					error.getField(), error.getDefaultMessage());
 			errors.add(errorDTO);
 		});

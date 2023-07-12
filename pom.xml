@@ -104,6 +104,8 @@
 					</systemPropertyVariables>
 					<excludes>
 			            <exclude>com/cerner/patient/config/AuditorAwareImpl.java</exclude>
+			            <exclude>com/cerner/patient/dto/**</exclude>
+			            <exclude>**/entity/**</exclude>
 			        </excludes>
 				</configuration>
 			</plugin>
